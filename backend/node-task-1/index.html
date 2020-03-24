@@ -1,0 +1,55 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form with Node</title>
+  <style>
+    .container {
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    #message-form {
+      display: grid;
+      row-gap: 1rem;
+    }
+
+    #message-form input,
+    #message-form button {
+      width: 100%;
+      padding: .5rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>Message Form</h1>
+    <form action="./message" method="post" id="message-form">
+      <label for="message">
+        <p>Enter a message</p>
+        <input required autofocus placeholder="e.g. I love start.ng" name="message" type="text">
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.querySelector('form');
+    form.onsubmit = () => {
+      fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: form['message'].value
+        })
+      });
+    }
+  </script>
+</body>
+
+</html>
